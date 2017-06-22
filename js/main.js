@@ -18,7 +18,8 @@ dojo.require("dijit.form.Button");
 dojo.require("esri.dijit.Scalebar");
 dojo.require("esri.dijit.HomeButton");
 
-var map, loading, infoTemplate;
+//var map, loading, infoTemplate;
+var map, infoTemplate;
 var findTask, find, findParams, queryTask, query, pqueryTask, dqueryTask, pdaFindTask, pdaFindParams;
 var pda, upda, pdaTitle, symbol;
 
@@ -78,12 +79,12 @@ function init() {
 	var basemap1 = new esri.layers.ArcGISTiledMapServiceLayer("http://gis.abag.ca.gov/arcgis/rest/services/admin/region_RegionAreas/MapServer");
 	map.addLayer(basemap1);
 
-	//var basemap2 = new esri.layers.ArcGISTiledMapServiceLayer("http://gis5.abag.ca.gov/arcgis/rest/services/base/srv_Basemap2/MapServer");
-	//map.addLayer(basemap2);
+	var basemap2 = new esri.layers.ArcGISTiledMapServiceLayer("http://gis5.abag.ca.gov/arcgis/rest/services/base/srv_Basemap2/MapServer");
+	map.addLayer(basemap2);
 
-	//var basemap3 = new esri.layers.ArcGISTiledMapServiceLayer("http://gis5.abag.ca.gov/arcgis/rest/services/imagery/Imagery_NAIP2005/MapServer", {id: 'imagery'});
-	//map.addLayer(basemap3);
-	//basemap3.hide();
+	var basemap3 = new esri.layers.ArcGISTiledMapServiceLayer("http://gis5.abag.ca.gov/arcgis/rest/services/imagery/Imagery_NAIP2005/MapServer", {id: 'imagery'});
+	map.addLayer(basemap3);
+	basemap3.hide();
 
 	var referenceLayer1 = new esri.layers.ArcGISTiledMapServiceLayer("http://gis.abag.ca.gov/arcgis/rest/services/ref/srv_referencemap1/MapServer", {id: 'reference'});
 	map.addLayer(referenceLayer1);
