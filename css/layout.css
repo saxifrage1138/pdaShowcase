@@ -1,0 +1,504 @@
+@charset "UTF-8";
+/*
+PDA Showcase Layout CSS
+September 2014
+Defines appearance of windows, text, and layout elements for app
+*/
+
+html,body {
+	min-width:800px;
+	height:100%;
+	width:100%;
+	margin:0;
+	padding:0;
+	overflow:hidden
+}
+
+body {
+	background:white;
+	overflow:hidden;
+	font-family:sans-serif,arial,verdana;
+	font-size:12px
+}
+
+#header {
+	border:solid 3px #7eabcd;
+	background:white;
+	height:64px;
+	vertical-align:middle;
+	padding:0;
+	z-index:100;
+	overflow:visible
+}
+
+.soria .dijitAccordionTitle {
+	border-top:1px solid #bdbdbd
+}
+
+#rightPane {
+	background-color:white;
+	border:solid 2px cornflowerblue;
+	width:30%;
+	overflow:hidden;
+	font-family:sans-serif, arial, verdana;
+	font-size:14px;
+}
+
+#areaover {
+	line-height:150%;
+}
+
+#comminvolv {
+	line-height:150%;
+}
+
+#getab {
+	border-spacing:0px 7px;
+}
+
+#gztab {
+	border-spacing:0px 7px;
+}
+
+#nonPBAText {
+	line-height:150%;
+}
+
+.soria .dijitButtonNode {
+	border:0
+}
+
+.soria .dijitDialogTitleBar {
+	text-align:left
+}
+
+.parts {
+	font-family:sans-serif, arial, verdana;
+	font-size:14px;
+	color:#555
+}
+
+.continue {
+	text-align:center
+}
+
+#map {
+	z-index:100;
+	background-color:white;
+	border:solid 2px cornflowerblue;
+	padding:0;
+}
+
+#HomeButton {
+	position:absolute;
+	top:95px;
+	left:20px;
+	z-index:50
+}
+
+#splashScreenMessage .dijitDialogCloseIcon {
+	display:none
+}
+
+#addressSearch .dijitDialogCloseIcon {
+	display:none
+}
+
+#citySearch {
+	position:relative;
+	top:90px;
+	left:70px;
+	z-index:100
+}
+
+#citySearch .dijitDialogCloseIcon {
+	display:none
+}
+
+#addTable {
+	width:250px
+}
+
+#cityTable {
+	width:100%
+}
+
+.col1 {
+	width:60px
+}
+
+.col2 {
+	width:190px
+}
+
+input {
+	font-size:15px;
+	font-weight:bold;
+	width:100%
+}
+
+#countyList {
+	margin:0;
+	padding:0;
+	width:170px;
+	text-align:center
+}
+
+.schoolList {
+	margin:0;
+	padding:0
+}
+
+.fireDist {
+	margin:0;
+	padding:0
+}
+
+.waterDist {
+	margin:0;
+	padding:0
+}
+
+.lyrInfo {
+	margin:0;
+	padding:0;
+	width:500px
+}
+
+td.top {
+	text-align:left;
+	font-family:sans-serif, arial, verdana;
+	font-size:24px;
+	font-weight:bold;
+	color:#336699;
+}
+
+td.tspace {
+	width:10px;
+}
+
+
+#info td {
+	padding:0 3px 10px 0;
+	vertical-align:text-top
+}
+
+hr {
+	width:65%
+}
+
+#outer {
+	width:100%;
+	height:35px;
+	vertical-align:middle;
+	position:relative
+}
+
+#demPaneTabs {
+	width:100%;
+	height:100%;
+}
+
+#menu .sub {
+	width:70px;
+	text-align:center
+}
+
+#menu {
+	list-style-type:none;
+	padding:0;
+	margin:0
+}
+
+#menu ul {
+	list-style-type:none;
+	padding:0;
+	margin:0
+}
+
+#menu li {
+	float:left;
+	height:35px;
+	margin:0;
+	width:60px;
+	text-align:center;
+	position:relative
+}
+
+#menu li.item {
+	left:-15px;
+	width:100px;
+	background:url("../img/bluegradient.png") repeat-x center left;
+	line-height:35px;
+	text-align:left
+}
+
+#menu li.itemd {
+	left:-20px;
+	width:105px;
+	background:url("../img/bluegradient.png") repeat-x center left;
+	line-height:35px;
+	text-align:center
+}
+
+#menu li.itemt {
+	left:-30px;
+	width:133px;
+	background:url("../img/bluegradient.png") repeat-x center left;
+	line-height:35px;
+	text-align:left
+}
+
+#menu img {
+	vertical-align:middle
+}
+
+#menu table {
+	border-collapse:collapse;
+	position:absolute;
+	top:0;
+	left:0;
+	font-size:1em
+}
+
+#menu li.item a {
+	display:block;
+	color:#000;
+	height:35px;
+	font-family:arial,sans-serif;
+	font-size:13px;
+	font-weight:bold;
+	width:100px;
+	text-decoration:none
+}
+
+#menu li.itemd a {
+	display:block;
+	color:#000;
+	height:35px;
+	font-family:arial,sans-serif;
+	font-size:13px;
+	font-weight:bold;
+	width:105px;
+	text-decoration:none
+}
+
+#menu li.itemt a {
+	display:block;
+	color:#000;
+	height:35px;
+	font-family:arial,sans-serif;
+	font-size:13px;
+	font-weight:bold;
+	width:133px;
+	text-decoration:none
+}
+
+#menu .item :hover {
+	color:#fff;
+	background:url("../img/bluegradientdark.png") repeat-x top left
+}
+
+#menu .itemd :hover {
+	color:#fff;
+	background:url("../img/bluegradientdark.png") repeat-x top left
+}
+
+#menu .itemt :hover {
+	color:#fff;
+	width:133px;
+	background:url("../img/bluegradientdark.png") repeat-x top left
+}
+
+#menu ul, #menu :hover ul ul, #menu:hover ul:hover ul ul, #menu:hover ul:hover ul ul.left {
+	position:absolute;
+	left:-9999px;
+	width:115px
+}
+
+#menu :hover ul {
+	left:0;
+	top:35px;
+	background:url("../img/transparent.gif")
+}
+
+#menu :hover ul:hover ul, #menu:hover ul:hover ul:hover ul {
+	padding:0 3px;
+	left:115px;
+	top:-3px
+}
+
+#menu :hover ul:hover ul.left, #menu:hover ul:hover ul:hover ul.left {
+	padding:0 3px;
+	left:-115px;
+	top:-3px
+}
+
+#county {
+	list-style-type:none;
+	padding:0;
+	margin:0
+}
+
+#county ul {
+	list-style-type:none;
+	padding:0;
+	margin:0
+}
+
+#county li {
+	float:left;
+	height:30px;
+	margin:0;
+	width:100%;
+	background:url("../img/bluegradient.png") repeat-x center left;
+	text-align:center;
+	position:relative;
+	line-height:30px
+}
+
+#county img {
+	vertical-align:middle
+}
+
+#county table {
+	border-collapse:collapse;
+	position:absolute;
+	top:0;
+	left:0;
+	font-size:1em
+}
+
+#county li a {
+	display:block;
+	color:#000;
+	height:30px;
+	font-family:arial,sans-serif;
+	font-size:13px;
+	font-weight:bold;
+	width:100%;
+	text-decoration:none
+}
+
+#county :hover {
+	color:#fff;
+	background:url("../img/bluegradientdark.png") repeat-x top left
+}
+
+#county ul, #county :hover ul #county:hover ul {
+	left:0;
+	top:0;
+	background:url("../img/transparent.gif")
+}
+
+#jurisdiction {
+	list-style-type:none;
+	padding:0;
+	margin:0
+}
+
+#jurisdiction ul {
+	list-style-type:none;
+	padding:0;
+	margin:0
+}
+
+#jurisdiction li {
+	float:left;
+	margin:0;
+	padding:5px 0 5px 0;
+	min-height:20px;
+	width:100%;
+	background:url("../img/bluegradient.png") repeat-x center left;
+	text-align:center;
+	position:relative
+}
+
+#jurisdiction img {
+	vertical-align:middle
+}
+
+#jurisdiction table {
+	border-collapse:collapse;
+	position:absolute;
+	top:0;
+	left:0;
+	font-size:1em
+}
+
+#jurisdiction li a {
+	display:block;
+	color:#000;
+	font-family:arial,sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	width:100%;
+	text-decoration:none
+}
+
+#jurisdiction :hover {
+	color:#fff;
+	background:url("../img/bluegradientdark.png") repeat-x top left
+}
+
+#jurisdiction ul, #jurisdiction :hover ul #jurisdiction:hover ul {
+	left:0;
+	top:0;
+	background:url("../img/transparent.gif")
+}
+
+#pda {
+	list-style-type:none;
+	padding:0;
+	margin:0
+}
+
+#pda ul {
+	list-style-type:none;
+	padding:0;
+	margin:0
+}
+
+#pda li {
+	float:left;
+	margin:0;
+	padding:5px 0 5px 0;
+	min-height:20px;
+	width:100%;
+	background:url("../img/bluegradient.png") repeat-x center left;
+	text-align:center;
+	position:relative
+}
+
+#pda img {
+	vertical-align:middle
+}
+
+#pda table {
+	border-collapse:collapse;
+	position:absolute;
+	top:0;
+	left:0;
+	font-size:1em
+}
+
+#pda li a {
+	display:block;
+	color:#000;
+	width:100%;
+	font-family:arial,sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	text-decoration:none
+}
+
+#pda :hover {
+	color:#fff;
+	background:url("../img/bluegradientdark.png") repeat-x center left
+}
+
+#pda ul, #pda :hover ul #pda:hover ul {
+	left:0;
+	top:0;
+	background:url("../img/transparent.gif")
+}

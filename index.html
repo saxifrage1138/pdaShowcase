@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html">
+	<!-- PDA SHOWCASE - February 2015
+		 App layout, menu/window labels, and DIV content -->
+	<!-- The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices -->
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+	<title>PDA Showcase</title>
+
+	<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.7/js/dojo/dijit/themes/soria/soria.css">
+	<!-- New addition -->
+	<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.7/js/dojo/dojox/grid/resources/Grid.css">
+	<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.7/js/dojo/dojox/grid/resources/soriaGrid.css">
+	<!-- End new addition -->
+	<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.7/js/esri/css/esri.css">
+	<link rel="stylesheet" type="text/css" href="css/layout.css">
+
+	<script>var djConfig = { parseOnLoad: true };</script>
+	<script src="http://js.arcgis.com/3.7compact/"></script>
+	<script async type="text/javascript" src="js/iefix.js"></script>
+	<script async type="text/javascript" src="js/main.js"></script>
+	<script async type="text/javascript" src="js/searchAddress.js"></script>
+	<script async type="text/javascript" src="js/searchCity.js"></script>
+	<script async type="text/javascript" src="js/queryBookmark.js"></script>
+	<script async type="text/javascript" src="js/print.js"></script>
+	<!-- script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-54238367-3', 'auto');
+	ga('require', 'displayfeatures');
+	ga('send', 'pageview');
+	</script -->
+
+</head>
+<body class="soria">
+	<div id="mainWindow"
+		data-dojo-type="dijit.layout.BorderContainer"
+		data-dojo-props="design:'headline', gutters:false"
+		style="width:100%; height:100%;">
+
+		<div id="header"
+		data-dojo-type="dijit.layout.ContentPane"
+		data-dojo-props="region:'top'">
+		<span>
+			<table style="border:0; width:100%">
+				<tr style="vertical-align:middle; padding:0; float:left">
+					<td><a href="http://www.onebayarea.org/plan-bay-area.html"><img height="46" width="127" src="img/plan-bay-area-logo.png"></a></td>
+					<td class="tspace"></td>
+					<td class="top" valign="middle">
+						Priority Development</br>
+						Area Showcase
+					</td>
+					<td>
+						<div id="outer">
+							<ul id="menu">
+								<li class="sub"><a href="#nogo1"><img src="img/icon_locate.png" style="width:33px; height:33px" alt="Find Location"/></a>
+									<ul>
+										<li class="item"><a href="javascript:openAddressSearch()"><img src="img/icon_crosshair.png" style="height:28px; width:33px"> Address</a></li>
+										<li class="item"><a href="javascript:openCitySearch()"><img src="img/icon_city.png" style="height:28px; width:33px"> City</a></li>
+										<li class="item"><a href="javascript:openCountyList()"><img src="img/icon_county.png" style="height:29px; width:34px"> County</a></li>
+									</ul>
+								</li>
+								<li class="sub"><a href="#nogo2"><img src="img/icon_pda32.png" style="height:32px; width:40px"></a>
+									<ul>
+										<li class="itemd"><a href="javascript:openALJurisPDAList()">Alameda</a>
+										<li class="itemd"><a href="javascript:openCCJurisPDAList()">Contra Costa</a></li>
+										<li class="itemd"><a href="javascript:openMAJurisPDAList()">Marin</a></li>
+										<li class="itemd"><a href="javascript:openNAJurisPDAList()">Napa</a></li>
+										<li class="itemd"><a href="javascript:openSFPDAList()">San Francisco</a></li>
+										<li class="itemd"><a href="javascript:openSMJurisPDAList()">San Mateo</a></li>
+										<li class="itemd"><a href="javascript:openSCJurisPDAList()">Santa Clara</a></li>
+										<li class="itemd"><a href="javascript:openSLJurisPDAList()">Solano</a></li>
+										<li class="itemd"><a href="javascript:openSNJurisPDAList()">Sonoma</a></li>
+									</ul>
+								</li>
+								<li class="sub"><a href="#nogo3"><img src="img/icon_base32.png" style="height:32px; width:32px"></a>
+									<ul>
+										<li class="item"><a href="javascript:openTerrainBL()"><img src="img/icon_terrain32.png" style="height:28px; width:35px"> Terrain</a>
+										<li class="item"><a href="javascript:openImageryBL()"><img src="img/icon_imagery32.png" style="height:28px; width:35px"> Imagery</a></li>
+									</ul>
+								</li>
+								<li class="sub"><a href="#nogo1"><img src="img/icon_toolbox.png" style="width:39px; height:39px" alt="Map Tools"/></a>
+									<ul>
+										<li class="itemt"><a href="javascript:clearGraphics()"><img src="img/layer_remove.png" style="width:26px; height:26px" alt="Clear PDA"/> Clear PDA</a></li>
+										<li class="itemt"><a href="javascript:exportMap()"><img src="img/printer_color.png" style="width:28px; height:28px" alt="Export Map"/> Export Map</a></li>
+										<li class="itemt"><a href="javascript:openLayerInfo()"><img src="img/icon_info.png" style="height:28px; width:28px" alt="Layer information"> Layer Info</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</span>
+	</div>
+
+	<div id="rightPane" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'right'">
+		<div id="attAccordion" data-dojo-type="dijit.layout.AccordionContainer">
+
+			<!-- PROFILE TAB -->
+			<div id="profile" data-dojo-type="dijit.layout.AccordionPane" data-dojo-props="title:'Profile', selected:true">
+				<span id="profiledef">Click Priority Development Area on map, or select from PDA menu, for PDA profile.</span>
+			</div>
+
+			<!-- DESCRIPTION TAB -->
+			<div data-dojo-type="dijit.layout.AccordionPane" title="Description">
+				<div id="descPaneTabs" data-dojo-type="dijit.layout.TabContainer" data-dojo-props="tabStrip:true">
+
+					<!-- AREA OVERVIEW TAB -->
+					<div id="areaover" data-dojo-type="dijit.layout.ContentPane" title="Overview" selected="true">
+						Click Priority Development Area on map, or select from PDA menu, for overview description of area.
+					</div>
+
+					<!-- PUBLIC OUTREACH TAB -->
+					<div id="comminvolv" data-dojo-type="dijit.layout.ContentPane" title="Public Outreach">
+						Click Priority Development Area on map, or select from PDA menu, for description of public outreach.
+					</div>
+				</div>
+			</div>
+
+			<!-- POPULATION/HOUSEHOLDS/JOBS TAB -->
+			<div data-dojo-type="dijit.layout.AccordionPane" title="Population / Households / Jobs">
+				<!-- NON-PBA PDA TAB -->
+				<div id="nonPBAText" data-dojo-type="dijit.layout.ContentPane">
+				</div>
+				<div id="demPaneTabs" data-dojo-type="dijit.layout.TabContainer" data-dojo-props="tabStrip:true">
+
+					<!-- EXISTING (2010) DEMOGRAPHICS TAB -->
+					<div id="existing" data-dojo-type="dijit.layout.ContentPane" title="2010" selected="true">
+						Click Priority Development Area on map, or select from PDA menu, for existing population, households, and jobs data.
+					</div>
+
+					<!-- PROJECTED (2040) DEMOGRAPHICS TAB -->
+					<div id="projected" data-dojo-type="dijit.layout.ContentPane" title="2040">
+						Click Priority Development Area on map, or select from PDA menu, for projected population, households, and jobs data.
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="centerPane"
+		data-dojo-type="dijit.layout.BorderContainer"
+		data-dojo-props="region:'center', gutters:false">
+		<div id="map"
+			data-dojo-type="dijit.layout.ContentPane"
+			data-dojo-props="region:'center'"
+			style="position:relative; overflow:hidden">
+			<img id="loadingImg" src="img/loading.gif" style="position:absolute; right:50%; top:50%; z-index:100;" />
+			<div id="HomeButton"></div>
+		</div>
+       </div>
+</div>
+
+<!-- Splash Screen -->
+<div id="splashScreenMessage" title="" data-dojo-type="dijit.Dialog" class="parts">
+	<b>Welcome to the PDA Showcase</b><br/><hr/><p>Priority Development Areas (PDAs) are locally-identified, infill development opportunity<br/>areas within existing communities. This showcase:<br/> <ul> <li>Highlights local planning efforts to create complete communities through<br/>Plan Bay Area <li>Demonstrates the variety of communities throughout the Bay Area that are<br/>pursuing transit-oriented development <li>Provides information about each area, including local PDA contact, area vision,<br/>and numbers for jobs and households in 2010 and 2040</ul> The compact growth envisioned through these PDAs is based in large part on local<br/>aspirations and community context. The PDAs reflect the diversity of the communities<br/>in the Bay Area. Explore the links in this application to learn more about each PDA.</p>
+
+	<div class="continue">
+		<button data-dojo-type="dijit.form.Button" type="button" data-dojo-props="onClick:function(){dijit.byId('splashScreenMessage').hide();}">Continue</button>
+	</div>
+</div>
+
+<!-- Address Search form -->
+<div id="addressSearch" title="Address Search" data-dojo-type="dijit.Dialog" class="addsearch" style="width:284px; height:235px; text-align:center;">
+	Enter both street (name & number) and zip<br />code information to locate address<br /><br />
+	<table id="addTable">
+		<tr>
+			<td class="col1">Street:</td>
+			<td class="col2"><input type="text" id="strNumberName"/></td>
+		</tr>
+		<tr>
+			<td>Zip Code:</td>
+			<td><input type="text" id="zipCode" /></td>
+		</tr>
+		<tr>
+			<td colspan="2"><br />
+				<div>
+					<button data-dojo-type="dijit.form.Button" onclick="locate()">Locate</button>
+					<button data-dojo-type="dijit.form.Button" type="button" data-dojo-props="onClick:'clearAddress()'">Clear</button>
+					<button data-dojo-type="dijit.form.Button" type="button" data-dojo-props="onClick:'closeAddressSearch()'">Close</button>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<div id="addressSearchError" style="color:red; font-size:11pt; font-weight:bold;"></div>
+</div>
+
+<!-- City Search form -->
+<div id="citySearch" title="City Search" data-dojo-type="dijit.Dialog" class="ctysearch" style="text-align:center; height:200px;">
+	Enter name of city [Example: Brisbane,<br />
+	St. Helena or Walnut Creek]<br /><br />
+	<table id="cityTable">
+		<tr>
+			<td class="col2"><input type="text" id="cityName" /></td>
+		</tr>
+		<tr>
+			<td colspan="2"><br />
+				<div>
+					<button data-dojo-type="dijit.form.Button" type="button" data-dojo-props="onClick:'searchCity()'">Search</button>
+					<button data-dojo-type="dijit.form.Button" type="button" data-dojo-props="onClick:'clearCity()'">Clear</button>
+					<button data-dojo-type="dijit.form.Button" type="button" data-dojo-props="onClick:'closeCitySearch()'">Close</button>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<div id="citySearchError" style="color:red; font-size:11pt; font-weight:bold;"></div>
+</div>
+
+<!-- County select and zoom -->
+<div data-dojo-type="dijit.Dialog" id="countyList" title="County">
+	<span>
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<ul id="county">
+						<li><a href="javascript:queryCounty('6001')">Alameda</a></li>
+						<li><a href="javascript:queryCounty('6013')">Contra Costa</a></li>
+						<li><a href="javascript:queryCounty('6041')">Marin</a></li>
+						<li><a href="javascript:queryCounty('6055')">Napa</a></li>
+						<li><a href="javascript:queryCounty('6075')">San Francisco</a></li>
+						<li><a href="javascript:queryCounty('6081')">San Mateo</a></li>
+						<li><a href="javascript:queryCounty('6085')">Santa Clara</a></li>
+						<li><a href="javascript:queryCounty('6095')">Solano</a></li>
+						<li><a href="javascript:queryCounty('6097')">Sonoma</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</span>
+</div>
+
+<!-- Alameda County jurisdictions and their PDAs -->
+<div data-dojo-type="dijit.Dialog" id="alJurisPDAList" class="jurisPDAList" title="Alameda County PDAs">
+	<div style="width:260px; border:0; padding:0; margin:0; max-height:390px; overflow:auto;">
+	<div id="alJuris">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<ul id="jurisdiction">
+						<li><a href="javascript:openALAPDAList()">Alameda</a></li>
+						<li><a href="javascript:openALCPDAList()">Alameda County</a></li>
+						<li><a href="javascript:openALBPDAList()">Albany</a></li>
+						<li><a href="javascript:openBERPDAList()">Berkeley</a></li>
+						<li><a href="javascript:openDUBPDAList()">Dublin</a></li>
+						<li><a href="javascript:openEMEPDAList()">Emeryville</a></li>
+						<li><a href="javascript:openFREPDAList()">Fremont</a></li>
+						<li><a href="javascript:openHAYPDAList()">Hayward</a></li>
+						<li><a href="javascript:openLIVPDAList()">Livermore</a></li>
+						<li><a href="javascript:openNEWPDAList()">Newark</a></li>
+						<li><a href="javascript:openOKDPDAList()">Oakland</a></li>
+						<li><a href="javascript:openPLEPDAList()">Pleasanton</a></li>
+						<li><a href="javascript:openSLEPDAList()">San Leandro</a></li>
+						<li><a href="javascript:openUNIPDAList()">Union City</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="alaPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openALJurisPDAList()">Return to Alameda County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('ALA1')">Naval Air Station</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('ALA2')">Northern Waterfront</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="alcPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openALJurisPDAList()">Return to Alameda County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('ALC1')">Castro Valley BART</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('ALC2')">East 14th &amp; Mission Blvd</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('ALC3')">Hesperian Boulevard</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('ALC4')">Meekland Ave Corridor</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="albPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openALJurisPDAList()">Return to Alameda County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('ALB1')">San Pablo &amp; Solano Mixed Use Neighborhood</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="berPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openALJurisPDAList()">Return to Alameda County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('BER1')">Adeline Street</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('BER2')">Downtown</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('BER3')">San Pablo Avenue</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('BER4')">South Shattuck</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('BER5')">Southside/Telegraph Avenue</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('BER6')">University Avenue</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="dubPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openALJurisPDAList()">Return to Alameda County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('DUB1')">Downtown Specific Plan Area</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('DUB2')">Transit Center/Dublin Crossings</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('DUB3')">Town Center</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="emePDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openALJurisPDAList()">Return to Alameda County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('EME1')">Mixed-Use Core</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="frePDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openALJurisPDAList()">Return to Alameda County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('FRE1')">Centerville</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('FRE2')">City Center</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('FRE3')">Irvington District</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('FRE4')">Warm Springs</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="hayPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openALJurisPDAList()">Return to Alameda County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('HAY1')">The Cannery</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('HAY2')">Downtown</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('HAY3_a')">South Hayward BART (Mixed-Use)</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('HAY3_b')">South Hayward BART (Urban<br />Neighborhood)</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('HAY4')">Mission Boulevard Corridor</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="livPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openALJurisPDAList()">Return to Alameda County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('LIV1')">Downtown</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('LIV2')">East Side</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('LIV3')">Isabel Avenue/BART Station Planning Area</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="newPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openALJurisPDAList()">Return to Alameda County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('NEW1')">Dumbarton Transit Oriented<br />Development</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('NEW2')">Old Town Mixed Use Area</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="okdPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openALJurisPDAList()">Return to Alameda County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('OKD1')">Transit Oriented Development Corridors</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('OKD1_a')">Transit Oriented Development Corridors - San Antonio/Central Estuary</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('OKD1_b')">Transit Oriented Development Corridors - International Boulevard</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('OKD2')">Coliseum BART Station Area</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('OKD3')">Downtown &amp; Jack London Square</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('OKD4')">Eastmont Town Center</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('OKD5')">Fruitvale and Dimond Areas</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('OKD6')">MacArthur Transit Village</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('OKD7')">West Oakland</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="plePDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openALJurisPDAList()">Return to Alameda County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('PLE1')">Hacienda</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="slePDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openALJurisPDAList()">Return to Alameda County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('SLE1')">Bay Fair BART Transit Village</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SLE2')">East 14th Street</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SLE3')">Downtown Transit Oriented<br />Development</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="uniPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openALJurisPDAList()">Return to Alameda County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('UNI1')">Intermodal Station District</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	</div>
+</div>
+
+<!-- Contra Costa County jurisdictions and their PDAs -->
+<div data-dojo-type="dijit.Dialog" id="ccJurisPDAList" class="jurisPDAList" title="Contra Costa County PDAs">
+	<div style="width:260px; border:0; padding:0; margin:0; max-height:390px; overflow:auto;">
+	<div id="ccJuris">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<ul id="jurisdiction">
+						<li><a href="javascript:openANTPDAList()">Antioch</a></li>
+						<li><a href="javascript:openCONPDAList()">Concord</a></li>
+						<li><a href="javascript:openCCCPDAList()">Contra Costa County</a></li>
+						<li><a href="javascript:openDANPDAList()">Danville</a></li>
+						<li><a href="javascript:openELCPDAList()">El Cerrito</a></li>
+						<li><a href="javascript:openHERPDAList()">Hercules</a></li>
+						<li><a href="javascript:openLAFPDAList()">Lafayette</a></li>
+						<li><a href="javascript:openMARPDAList()">Martinez</a></li>
+						<li><a href="javascript:openMORPDAList()">Moraga</a></li>
+						<li><a href="javascript:openOAKPDAList()">Oakley</a></li>
+						<li><a href="javascript:openORIPDAList()">Orinda</a></li>
+						<li><a href="javascript:openPINPDAList()">Pinole</a></li>
+						<li><a href="javascript:openPITPDAList()">Pittsburg</a></li>
+						<li><a href="javascript:openPLHPDAList()">Pleasant Hill</a></li>
+						<li><a href="javascript:openRICPDAList()">Richmond</a></li>
+						<li><a href="javascript:openSARPDAList()">San Ramon</a></li>
+						<li><a href="javascript:openSPAPDAList()">San Pablo</a></li>
+						<li><a href="javascript:openWALPDAList()">Walnut Creek</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="antPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('ANT1')">Hillcrest eBART Station</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('ANT2')">Rivertown Waterfront</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="conPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('CON1_a')">Community Reuse Area/Los Medanos (Suburban Center)</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('CON1_b')">Community Reuse Area/Los Medanos (Transit Neighborhood)</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('CON2')">Downtown</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="cccPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('CCC1')">Contra Costa Centre</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('CCC2')">North Richmond</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('CCC3_a')">Pittsburg/Bay Point BART (Bay Point)</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('CCC3_b')">Pittsburg/Bay Point BART (Pittsburg)</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('CCC4')">Downtown El Sobrante</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('WCC1_a')">West Contra Costa Transportation Advisory Committee San Pablo Avenue</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="danPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('DAN1')">Downtown</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="elcPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('ELC1_a')">San Pablo Avenue (Del Norte Station)</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('ELC1_b')">San Pablo Avenue (South of Del Norte Station)</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="herPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('HER1')">Central Hercules</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('HER2')">Waterfront District</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('WCC1_g')">West Contra Costa Transportation Advisory Committee San Pablo Avenue</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="lafPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('LAF1')">Downtown</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="marPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('MAR1')">Downtown</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="morPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('MOR1')">Moraga Center</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="oakPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('OAK1')">Employment Area</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('OAK2')">Downtown</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('OAK3')">Potential Planning Area</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="oriPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('ORI1')">Downtown</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="pinPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('PIN1')">Old Town San Pablo Avenue</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('PIN2')">Appian Way Corridor</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="pitPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('PIT1')">Railroad Avenue eBART Station</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('PIT2')">Downtown</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="plhPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('PLH1')">Diablo Valley College</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('PLH2')">Buskirk Avenue Corridor</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="ricPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('RIC1_a')">Central Richmond &amp; 23rd Street<br />Corridor (Central Richmond)</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('RIC1_b')">Central Richmond &amp; 23rd Street<br />Corridor (23rd Street)</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('CCC2')">North Richmond</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('RIC2')">South Richmond</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('WCC1_c')">West Contra Costa Transportation Advisory Committee San Pablo Avenue</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="sarPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('SAR1')">City Center</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SAR2')">North Camino Ramon</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="spaPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('SPA1')">San Pablo Avenue &amp; 23rd Street<br />Corridors</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="walPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openCCJurisPDAList()">Return to Contra Costa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('WAL1')">Core Area</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	</div>
+</div>
+
+<!-- Marin County jurisdictions and their PDAs -->
+<div data-dojo-type="dijit.Dialog" id="maJurisPDAList" class="jurisPDAList" title="Marin County PDAs">
+	<div style="width:260px; border:0; padding:0; margin:0; max-height:390px; overflow:auto;">
+	<div id="maJuris">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<ul id="jurisdiction">
+						<li style="min-width:250px;"><a href="javascript:openMCOPDAList()">Marin County</a></li>
+						<li style="min-width:250px;"><a href="javascript:openSRAPDAList()">San Rafael</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="mcoPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openMAJurisPDAList()">Return to Marin County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('MCO1')">Urbanized 101 Corridor</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="sraPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openMAJurisPDAList()">Return to Marin County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('SRA1')">Downtown</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	</div>
+</div>
+
+<!-- Napa County jurisdictions and their PDAs -->
+<div data-dojo-type="dijit.Dialog" id="naJurisPDAList" class="jurisPDAList" title="Napa County PDAs">
+	<div style="width:260px; border:0; padding:0; margin:0; max-height:390px; overflow:auto;">
+	<div id="naJuris">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<ul id="jurisdiction">
+						<li style="min-width:250px;"><a href="javascript:openACAPDAList()">American Canyon</a></li>
+						<li style="min-width:250px;"><a href="javascript:openNAPPDAList()">Napa</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="acaPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openNAJurisPDAList()">Return to Napa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('ACA1')">Highway 29 Corridor</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="napPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openNAJurisPDAList()">Return to Napa County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('NAP1')">Downtown &amp; Soscol Gateway Corridor</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	</div>
+</div>
+
+<!-- San Francisco PDAs -->
+<div data-dojo-type="dijit.Dialog" id="sfPDAList" class="pdaList" title="San Francisco PDAs">
+	<div style="width:260px; border:0; padding:0; margin:0; max-height:390px; overflow:auto;">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('SFO1')">Bayview/Hunters Point Shipyard/<br />Candlestick</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SFO2')">Balboa Park</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SFO3')">Downtown-Van Ness-Geary</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SFO4')">Eastern Neighborhoods</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SFO5')">Mission Bay</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SFO6')">Port of San Francisco</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SFO7')">Transit Center District</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SFO8')">Treasure Island &amp; Yerba Buena Island</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SFO9_b')">San Francisco/San Mateo Bi-County Area</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SFO10')">19th Avenue</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SFO11')">Market &amp; Octavia</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SFO12')">Mission-San Jose Corridor</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<!-- San Mateo County jurisdictions and their PDAs -->
+<div data-dojo-type="dijit.Dialog" id="smJurisPDAList" class="jurisPDAList" title="San Mateo County PDAs">
+	<div style="width:260px; border:0; padding:0; margin:0; max-height:390px; overflow:auto;">
+	<div id="smJuris">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<ul id="jurisdiction">
+						<li><a href="javascript:openBELPDAList()">Belmont</a></li>
+						<li><a href="javascript:openBRIPDAList()">Brisbane</a></li>
+						<li><a href="javascript:openBURPDAList()">Burlingame</a></li>
+						<li><a href="javascript:openCOLPDAList()">Colma</a></li>
+						<li><a href="javascript:openDALPDAList()">Daly City</a></li>
+						<li><a href="javascript:openEPAPDAList()">East Palo Alto</a></li>
+						<li><a href="javascript:openMENPDAList()">Menlo Park</a></li>
+						<li><a href="javascript:openMILPDAList()">Millbrae</a></li>
+						<li><a href="javascript:openRWCPDAList()">Redwood City</a></li>
+						<li><a href="javascript:openSBRPDAList()">San Bruno</a>
+						<li><a href="javascript:openSCAPDAList()">San Carlos</a></li>
+						<li><a href="javascript:openSMAPDAList()">San Mateo</a></li>
+						<li><a href="javascript:openSMCPDAList()">San Mateo County</a></li>
+						<li><a href="javascript:openSSFPDAList()">South San Francisco</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="belPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSMJurisPDAList()">Return to San Mateo County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('BEL1')">Villages of Belmont</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="briPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSMJurisPDAList()">Return to San Mateo County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('SFO9_a')">San Francisco/San Mateo Bi-County<br />Area</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="burPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSMJurisPDAList()">Return to San Mateo County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('BUR1')">Burlingame El Camino Real</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="colPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSMJurisPDAList()">Return to San Mateo County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('CCG1_b')">El Camino Real</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="dalPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSMJurisPDAList()">Return to San Mateo County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('DAL1')">Mission Boulevard</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('DAL2')">Bayshore</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="epaPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSMJurisPDAList()">Return to San Mateo County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('EPA1')">Ravenswood</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="menPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSMJurisPDAList()">Return to San Mateo County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('MEN1')">El Camino Real Corridor &amp; Downtown</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="milPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSMJurisPDAList()">Return to San Mateo County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('MIL1')">Transit Station Area</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="rwcPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSMJurisPDAList()">Return to San Mateo County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('RWC1')">Downtown</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('RWC2')">Broadway/Veterans Boulevard Corridor</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('RWC3')">El Camino Real Corridor</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="sbrPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSMJurisPDAList()">Return to San Mateo County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('SBR1')">Transit Corridors</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="scaPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSMJurisPDAList()">Return to San Mateo County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('SCA1')">Railroad Corridor</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="smaPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSMJurisPDAList()">Return to San Mateo County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('SMA1')">Downtown</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SMA2')">Rail Corridor</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SMA3')">El Camino Real</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SMA4')">Grand Boulevard Initiative</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="smcPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSMJurisPDAList()">Return to San Mateo County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('CCG1_k')">El Camino Real (Unincorporated Colma)</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('CCG1_l')">El Camino Real (North Fair Oaks)</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="ssfPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSMJurisPDAList()">Return to San Mateo County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('SSF1')">Downtown</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('CCG1_c')">El Camino Real</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	</div>
+</div>
+
+<!-- Santa Clara County jurisdictions and their PDAs -->
+<div data-dojo-type="dijit.Dialog" id="scJurisPDAList" class="jurisPDAList" title="Santa Clara County PDAs">
+	<div style="width:260px; border:0; padding:0; margin:0; max-height:390px; overflow:auto;">
+	<div id="scJuris">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<ul id="jurisdiction">
+						<li><a href="javascript:openCAMPDAList()">Campbell</a></li>
+						<li><a href="javascript:openCUPPDAList()">Cupertino</a></li>
+						<li><a href="javascript:openGILPDAList()">Gilroy</a></li>
+						<li><a href="javascript:openLATPDAList()">Los Altos</a></li>
+						<li><a href="javascript:openMPTPDAList()">Milpitas</a></li>
+						<li><a href="javascript:openMOHPDAList()">Morgan Hill</a></li>
+						<li><a href="javascript:openMVWPDAList()">Mountain View</a></li>
+						<li><a href="javascript:openPALPDAList()">Palo Alto</a></li>
+						<li><a href="javascript:openSJOPDAList()">San Jose</a></li>
+						<li><a href="javascript:openSCLPDAList()">Santa Clara</a></li>
+						<li><a href="javascript:openSUNPDAList()">Sunnyvale</a>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="camPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSCJurisPDAList()">Return to Santa Clara County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('CAM1')">Central Redevelopment Area</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="cupPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSCJurisPDAList()">Return to Santa Clara County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('VTA1_b')">VTA City Cores, Corridors &amp; Station Areas</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="gilPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSCJurisPDAList()">Return to Santa Clara County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('GIL1')">Downtown</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('VTA1_c')">VTA City Cores, Corridors &amp; Station Areas</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="latPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSCJurisPDAList()">Return to Santa Clara County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('VTA1_d')">VTA City Cores, Corridors &amp; Station Areas</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="mptPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSCJurisPDAList()">Return to Santa Clara County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('MPT1')">Transit Area</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('VTA1_f')">VTA City Cores, Corridors &amp; Station Areas</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="mohPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSCJurisPDAList()">Return to Santa Clara County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('MOH1')">Downtown</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="mvwPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSCJurisPDAList()">Return to Santa Clara County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('MVW1')">Whisman Station</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('MVW2')">Downtown</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('MVW3')">San Antonio</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('MVW4')">El Camino Real</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('MVW6')">North Bayshore</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="palPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSCJurisPDAList()">Return to Santa Clara County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('PAL1')">California Avenue</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="sjoPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSCJurisPDAList()">Return to Santa Clara County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO1')">Greater Downtown</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO2')">Cottle Transit Village (Hitachi)</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO3')">North San Jose</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO4')">Downtown "Frame"</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO5')">Berryessa Station</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO6')">Communications Hill</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO7')">West San Carlos &amp; Southwest<br />Expressway Corridors</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO8')">East Santa Clara/Alum Rock<br />Corridor</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO9')">Stevens Creek TOD Corridor</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO10')">Oakridge/Almaden Plaza Urban<br />Village</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO11')">Capitol/Tully/King Urban Villages</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO12')">Saratoga TOD Corridor</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO13')">Winchester Boulevard TOD<br />Corridor</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO14')">Bascom TOD Corridor</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO15')">Bascom Urban Village</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO16')">Camden Urban Village</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO17')">Blossom Hill/Snell Urban Village</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO18')">Capitol Corridor Urban Villages</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SJO19')">Westgate/El Paseo Urban Village</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('VTA1_i')">VTA City Cores, Corridors &amp; Station<br />Areas</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="sclPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSCJurisPDAList()">Return to Santa Clara County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('SCL1')">El Camino Real Focus Area</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SCL2')">Santa Clara Station Focus Area</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="sunPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSCJurisPDAList()">Return to Santa Clara County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('SUN1')">Lawrence Station Transit Village</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SUN2')">Downtown &amp; Caltrain Station</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SUN3')">El Camino Real Corridor</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SUN6')">East Sunnyvale</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SUN8')">Tasman Crossing</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	</div>
+</div>
+
+<!-- Solano County jurisdictions and their PDAs -->
+<div data-dojo-type="dijit.Dialog" id="slJurisPDAList" class="jurisPDAList" title="Solano County PDAs">
+	<div style="width:260px; border:0; padding:0; margin:0; max-height:390px; overflow:auto;">
+	<div id="slJuris">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<ul id="jurisdiction">
+						<li><a href="javascript:openBENPDAList()">Benicia</a></li>
+						<li><a href="javascript:openDIXPDAList()">Dixon</a></li>
+						<li><a href="javascript:openFAIPDAList()">Fairfield</a></li>
+						<li><a href="javascript:openSUIPDAList()">Suisun City</a></li>
+						<li><a href="javascript:openVACPDAList()">Vacaville</a></li>
+						<li><a href="javascript:openVALPDAList()">Vallejo</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="benPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSLJurisPDAList()">Return to Solano County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('BEN1')">Downtown</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('BEN2')">Northern Gateway - Benicia's Industrial Park</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="dixPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSLJurisPDAList()">Return to Solano County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('DIX1')">Downtown</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="faiPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSLJurisPDAList()">Return to Solano County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('FAI1')">Downtown South (Jefferson Street)</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('FAI2')">Fairfield-Vacaville Train Station</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('FAI3')">North Texas Street Core</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('FAI4')">West Texas Street Gateway</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="suiPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSLJurisPDAList()">Return to Solano County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('SUI1')">Downtown &amp; Waterfront</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="vacPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSLJurisPDAList()">Return to Solano County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('VAC1')">Downtown</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('VAC2')">Allison Area</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="valPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSLJurisPDAList()">Return to Solano County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('VAL1')">Waterfront &amp; Downtown</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	</div>
+</div>
+
+<!-- Sonoma County jurisdictions and their PDAs -->
+<div data-dojo-type="dijit.Dialog" id="snJurisPDAList" class="jurisPDAList" title="Sonoma County PDAs">
+	<div style="width:260px; border:0; padding:0; margin:0; max-height:390px; overflow:auto;">
+	<div id="snJuris">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<ul id="jurisdiction">
+						<li><a href="javascript:openCLOPDAList()">Cloverdale</a></li>
+						<li><a href="javascript:openCOTPDAList()">Cotati</a></li>
+						<li><a href="javascript:openPETPDAList()">Petaluma</a></li>
+						<li><a href="javascript:openROHPDAList()">Rohnert Park</a></li>
+						<li><a href="javascript:openSROPDAList()">Santa Rosa</a></li>
+						<li><a href="javascript:openSEBPDAList()">Sebastopol</a></li>
+						<li><a href="javascript:openWINPDAList()">Windsor</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="cloPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSNJurisPDAList()">Return to Sonoma County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('CLO1')">Downtown/SMART Transit Area</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="cotPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSNJurisPDAList()">Return to Sonoma County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('COT1')">Downtown &amp; Cotati Depot</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="petPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSNJurisPDAList()">Return to Sonoma County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('PET1')">Central, Turning Basin/Lower Reach</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="rohPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSNJurisPDAList()">Return to Sonoma County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('ROH1')">Sonoma Mountain Village</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('ROH2')">Central Rohnert Park</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="sroPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSNJurisPDAList()">Return to Sonoma County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('SRO1')">Downtown Station Area</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SRO2')">Mendocino Avenue/Santa Rosa Avenue Corridor</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SRO3')">Sebastopol Road Corridor</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SRO4')">North Santa Rosa Station</a></li>
+						<li style="min-width:250px;"><a href="#" onclick="execute('SRO5')">Roseland</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="sebPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSNJurisPDAList()">Return to Sonoma County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('SEB1')">Core Area</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="winPDA">
+		<table>
+			<tr style="vertical-align:middle;">
+				<td>
+					<a href="javascript:openSNJurisPDAList()">Return to Sonoma County jurisdiction list</a><br /><br />
+					<ul id="pda">
+						<li style="min-width:250px;"><a href="#" onclick="execute('WIN1')">Redevelopment Area</a></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	</div>
+</div>
+
+<!-- Map export form -->
+<div id="printForm" title="Export to PDF or Image" data-dojo-type="dijit.Dialog" class="print" style="text-align:center">
+	Use Print drop-down to choose layout<br />
+	and format. For	default (letter-sized,<br />
+	landscape, PDF), just click Print.<br />
+	<div id="btnPrint"></div>
+	*** Map opens in new window.<br />
+	Pop-ups need to be enabled to<br />
+	view output. ***<br /><br />
+	<div class="closePrint">
+		<button data-dojo-type="dijit.form.Button" type="button" data-dojo-props="onClick:'closePrintForm()'">Close</button>
+	</div>
+</div>
+
+<!-- PDA Showcase layer information -->
+<div id="layerInfo" title="PDA Showcase Map Layers" data-dojo-type="dijit.Dialog" class="lyrInfo">
+	<div style="width:100%; border:0; padding:0; margin:0;">
+		<table>
+			<tr style="font-weight:Bold">
+				<td style="width:100px">Map Layer</td>
+				<td style="width:280px">Description</td>
+				<td style="width:120px">Source</td>
+			</tr>
+		</table>
+	</div>
+	<div style="width:100%; border:0; padding:0; margin:0; max-height:400px; overflow:auto;">
+		<table id="info">
+			<tr>
+				<td style="vertical-align:text-top">Priority Development Areas</td>
+				<td style="vertical-align:text-top">Priority Development Areas (PDAs) are areas where new development will support the day-to-day needs of residents and workers in a pedestrian-friendly environment served by transit. While PDAs were originally established to address housing needs in infill communities, they have been broadened to advance focused employment growth. Local jurisdictions have defined the character of their PDAs according to existing conditions and future expectations as regional centers, city centers, suburban centers or transit town centers, among other place types.</td>
+				<td style="vertical-align:text-top">Association of Bay Area Governments<br />Last updated: July 2015
+				<br /><a href="http://gis.abag.ca.gov/datacat/pln/PriorityDevelopmentAreas_current.zip">PDA shapefile</a></td>
+			</tr>
+			<tr>
+				<td style="vertical-align:text-top">Population, Households, and Jobs</td>
+				<td style="vertical-align:text-top">The 2010 and 2040 population, household, and job data for the PDAs were produced for Plan Bay Area, the regional land use and transportation plan for the San Francisco Bay Area.<br /><br /></td>
+				<td style="vertical-align:text-top">Association of Bay Area Governments<br />Date: 2013<br /><a href="http://gis.abag.ca.gov/datacat/pln/Final Plan Bay Area numbers_May 24 2013.xls">Excel spreadsheet</a> or <a href="http://gis.abag.ca.gov/datacat/pln/FinalPlanBayAreaNumbers_DBF.zip">DBF file</a></td>
+			</tr>
+			<tr>
+				<td style="width:100px">Terrain</td>
+				<td style="width:280px">Hillshades (color and grayscale) were downloaded in parts from USGS websites and assembled into single raster datasets. These different hillshades were then assembled into a map service providing topographic relief from region to local scales.<br /><br />The ~90m hillshade data, used for small scale viewing, was derived from the Shuttle Radar Topography Mission (SRTM) 3 arc-second dataset. Open Source software was used to create a hillshade from the elevation data provided by the SRTM.<br /><br />The ~10m and ~30m hillshade data, used for medium and large scale viewing, are from the National Elevation Dataset (NED) 1/3 and 1 arc-second datasets. The NED data is provided as a hillshade by default.<br /><br />The color hillshades (all datasets) were created by applying a color map to the original, black and white hillshades.</td>
+				<td style="width:120px">United States Geological Survey<br/>Date: 2005<br/><a href="http://viewer.nationalmap.gov/viewer/">NED 1/3 (~10 meter) and NED 1 (~30 meter) hillshades</a><br /><br />
+				<a href="http://earthexplorer.usgs.gov/">SRTM 3-ARC (~90 meter) elevation data</a></td>
+			</tr>
+			<tr>
+				<td style="vertical-align:text-top">Base Map</td>
+				<td style="vertical-align:text-top">Roads, boundaries, water, and labels.</td>
+				<td style="vertical-align:text-top">Tom Tom<br/>Date: 2005<br/>Private vendor, data is not public.</td>
+			</tr>
+		</table>
+		<br/><br/>
+	</div>
+	<div class="closeAppInfo"  style="text-align:center">
+		<button data-dojo-type="dijit.form.Button" type="button" data-dojo-props="onClick:'closeLayerInfo()'">Close</button>
+	</div>
+</div>
+
+</body>
+</html>
