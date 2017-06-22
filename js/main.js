@@ -1,5 +1,5 @@
 //PDA SHOWCASE MAP APP MAIN CONFIG
-//February 2015
+//June 2017
 //Set up map projection, start extent, layers and basic functionality
 
 //Includes
@@ -23,14 +23,14 @@ var findTask, find, findParams, queryTask, query, pqueryTask, dqueryTask, pdaFin
 var pda, upda, pdaTitle, symbol;
 
 function init() {
-	loading = dojo.byId("loadingImg");
-	esri.config.defaults.io.corsEnabledServers.push("gis5.abag.ca.gov");
+	//loading = dojo.byId("loadingImg");
+	//esri.config.defaults.io.corsEnabledServers.push("gis5.abag.ca.gov");
 
 	//Fallback to proxy for non-CORS capable browsers
-	esri.config.defaults.io.proxyUrl = "/PHP/proxy.php";
-	esri.config.defaults.io.alwaysUseProxy = true;
+	//esri.config.defaults.io.proxyUrl = "/PHP/proxy.php";
+	//esri.config.defaults.io.alwaysUseProxy = true;
 
-	dijit.byId("splashScreenMessage").show();
+	//dijit.byId("splashScreenMessage").show();
 	esri.bundle.widgets.legend.NLS_noLegend = '';
 
 	var customExtentAndSR = new esri.geometry.Extent(453414.023, 4114578.220, 659260.268, 4271476.450, new esri.SpatialReference({"wkid": 26910}));
@@ -56,8 +56,8 @@ function init() {
 		infoWindow: infoWindow
 	});
 
-	dojo.connect(map, "onUpdateStart", showLoading);
-	dojo.connect(map, "onUpdateEnd", hideLoading);
+	//dojo.connect(map, "onUpdateStart", showLoading);
+	//dojo.connect(map, "onUpdateEnd", hideLoading);
 
 	var scalebar = new esri.dijit.Scalebar({
 		map: map,
@@ -78,12 +78,12 @@ function init() {
 	var basemap1 = new esri.layers.ArcGISTiledMapServiceLayer("http://gis.abag.ca.gov/arcgis/rest/services/admin/region_RegionAreas/MapServer");
 	map.addLayer(basemap1);
 
-	var basemap2 = new esri.layers.ArcGISTiledMapServiceLayer("http://gis5.abag.ca.gov/arcgis/rest/services/base/srv_Basemap2/MapServer");
-	map.addLayer(basemap2);
+	//var basemap2 = new esri.layers.ArcGISTiledMapServiceLayer("http://gis5.abag.ca.gov/arcgis/rest/services/base/srv_Basemap2/MapServer");
+	//map.addLayer(basemap2);
 
-	var basemap3 = new esri.layers.ArcGISTiledMapServiceLayer("http://gis5.abag.ca.gov/arcgis/rest/services/imagery/Imagery_NAIP2005/MapServer", {id: 'imagery'});
-	map.addLayer(basemap3);
-	basemap3.hide();
+	//var basemap3 = new esri.layers.ArcGISTiledMapServiceLayer("http://gis5.abag.ca.gov/arcgis/rest/services/imagery/Imagery_NAIP2005/MapServer", {id: 'imagery'});
+	//map.addLayer(basemap3);
+	//basemap3.hide();
 
 	var referenceLayer1 = new esri.layers.ArcGISTiledMapServiceLayer("http://gis.abag.ca.gov/arcgis/rest/services/ref/srv_referencemap1/MapServer", {id: 'reference'});
 	map.addLayer(referenceLayer1);
@@ -138,15 +138,15 @@ function init() {
 		});
 	}
 
-	function showLoading() {
-		esri.show(loading);
-		map.disableMapNavigation();
-	}
+	//function showLoading() {
+	//	esri.show(loading);
+	//	map.disableMapNavigation();
+	//}
 
-	function hideLoading(error) {
-		esri.hide(loading);
-		map.enableMapNavigation();
-	}
+	//function hideLoading(error) {
+	//	esri.hide(loading);
+	//	map.enableMapNavigation();
+	//}
 
 	//SELECT MENU SECTION
 	function execute(searchText, id) {
@@ -493,15 +493,15 @@ function init() {
 		dijit.byId('attAccordion').selectChild('profile');
 	}
 
-	function openTerrainBL() {
-		map.getLayer("reference").setVisibility(true);
-		map.getLayer("imagery").setVisibility(false);
-	}
+	//function openTerrainBL() {
+	//	map.getLayer("reference").setVisibility(true);
+	//	map.getLayer("imagery").setVisibility(false);
+	//}
 
-	function openImageryBL() {
-		map.getLayer("reference").setVisibility(false);
-		map.getLayer("imagery").setVisibility(true);
-	}
+	//function openImageryBL() {
+	//	map.getLayer("reference").setVisibility(false);
+	//	map.getLayer("imagery").setVisibility(true);
+	//}
 
 	function openLayerInfo() {
 		dijit.byId('layerInfo').show();
