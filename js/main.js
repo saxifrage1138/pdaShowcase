@@ -28,8 +28,8 @@ function init() {
 	//esri.config.defaults.io.corsEnabledServers.push("gis5.abag.ca.gov");
 
 	//Fallback to proxy for non-CORS capable browsers
-	//esri.config.defaults.io.proxyUrl = "/PHP/proxy.php";
-	//esri.config.defaults.io.alwaysUseProxy = true;
+	esri.config.defaults.io.proxyUrl = "../prox/proxy.php";
+	esri.config.defaults.io.alwaysUseProxy = true;
 
 	//dijit.byId("splashScreenMessage").show();
 	esri.bundle.widgets.legend.NLS_noLegend = '';
